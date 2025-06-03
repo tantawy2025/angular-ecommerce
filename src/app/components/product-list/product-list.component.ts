@@ -5,11 +5,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CartItem } from '../../common/cart-item';
+import { CartService } from '../../services/cart.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule,HttpClientModule,RouterModule,NgbModule],
+  imports: [CommonModule,HttpClientModule,RouterModule,NgbModule,FormsModule],
   templateUrl: './product-list-grid.component.html',
   // templateUrl: './product-list-table.component.html',
   // templateUrl: './product-list.component.html',
@@ -30,6 +33,7 @@ export class ProductListComponent {
   previousKeyword: string = "";
 
   constructor(private productService: ProductService,
+    private cartService :CartService,
     private route:ActivatedRoute
   ) {}
 
@@ -133,4 +137,14 @@ export class ProductListComponent {
       this.theTotalElements = data.page.totalElements;
     };
   }
+
+    addToCart(theProduct: Product) {
+    
+      console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
+
+      // TODO ... do the real work
+      const theCartItem = new CartItem(theProduct);
+
+      this.cartService.addToCart(theCartItem);
+    }
 }
