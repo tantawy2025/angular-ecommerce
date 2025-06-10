@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CartItem } from '../../common/cart-item';
 import { CartService } from '../../services/cart.service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { CheckoutComponent } from '../checkout/checkout.component';
 
 @Component({
   selector: 'app-cart-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule,HttpClientModule,CheckoutComponent],
   templateUrl: './cart-details.component.html',
   styleUrl: './cart-details.component.scss'
 })
